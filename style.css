@@ -1,0 +1,54 @@
+nav{
+    height: 60px;
+    background-color:gray;
+    color: white;
+    margin-bottom: 40px;
+    display: flex;
+
+}
+h1{
+    margin: auto;
+}
+
+p{
+    margin: 16px 0;
+}
+h3{
+    margin: 16px 0 0 0;
+}
+h4{
+    margin-bottom:20px;
+}
+button{
+    background-color:#057bff;
+    border: none;
+    border-radius: 3px;
+    height:30px;
+    width: 30px;
+    color:white;
+    
+    padding: 0;
+}
+input{
+    height: 30px;
+    
+    padding: 0;
+}
+#search-tab{
+    height: 100vh;
+    
+}
+.location-section{
+    border: 1px solid lightgray;
+    border-radius: 3px;
+}
+.location-forecast{
+    border: 1px solid lightgray;
+    border-radius: 3px;
+}
+.searched{
+    margin: 16px 0px 16px 5px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+}
+

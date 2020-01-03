@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <title>Weather App</title>
+
+</head>
+
+<body>
+    <nav class="title">
+        <h1>Welcome to Weather App</h1>
+    </nav>
+    <!-- nav outside of container -->
+    <div class="container">
+
+        <!-- search section -->
+        <div class="row">
+            <div id="search-tab" class="col-4">
+                <form>
+                    <h4>Search for a City:</h4>
+                    <input type="text" id="city-search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+
+            </div>
+            <div class="col-8">
+                <div class="location-section">
+                    <h3 id="searched-location"></h3>
+
+                </div>
+                <div class="location-forecast">
+                    <h3>Five-Day Forecast</h3>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <!-- scripts -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="weatherScript.js"></script>
+</body>
+
+</html>
