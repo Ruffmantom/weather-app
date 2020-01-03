@@ -33,10 +33,12 @@ $(document).ready(function () {
             var p = $("<p>");
             p.addClass("searched");
             p.text(response.city.name);
+            // storing the searched city to a p tag below inside the search div
             $("#serched-cities").prepend(p);
+
         });
     }
-    // storing the searched city to a p tag below inside the search div
+
 
 
 
