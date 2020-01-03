@@ -22,7 +22,7 @@ h4{
 button{
     background-color:#057bff;
     border: none;
-    border-radius: 3px;
+    border-radius: 4px;
     height:30px;
     width: 30px;
     color:white;
@@ -36,12 +36,12 @@ input{
 }
 #search-tab{
     height: 100vh;
+    background-color: rgb(233, 233, 233);
+    border-radius: 4px;
+    padding-top: 20px;
     
 }
-.location-section{
-    border: 1px solid lightgray;
-    border-radius: 3px;
-}
+
 .location-forecast{
     border: 1px solid lightgray;
     border-radius: 3px;
@@ -49,6 +49,6 @@ input{
 .searched{
     margin: 16px 0px 16px 5px;
     border: 1px solid lightgray;
-    border-radius: 3px;
+    border-radius: 4px;
 }
 
