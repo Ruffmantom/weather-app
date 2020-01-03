@@ -30,7 +30,7 @@ button{
 }
 input{
     height: 30px;
-    padding: 0;
+    padding: 0 0 0 5px;
     border: 1px solid lightgray;
     border-radius: 4px;
 
