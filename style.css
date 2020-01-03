@@ -31,7 +31,11 @@ button{
 input{
     height: 30px;
     padding: 0;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+
 }
+
 #search-tab{
     height: 100%;
     background-color: rgb(233, 233, 233);
