@@ -26,19 +26,18 @@ button{
     height:30px;
     width: 30px;
     color:white;
-    
     padding: 0;
 }
 input{
     height: 30px;
-    
     padding: 0;
 }
 #search-tab{
-    height: 100vh;
+    height: 100%;
     background-color: rgb(233, 233, 233);
     border-radius: 4px;
-    padding-top: 20px;
+    padding: 20px 10px;
+    
     
 }
 
@@ -47,8 +46,10 @@ input{
     border-radius: 3px;
 }
 .searched{
-    margin: 16px 0px 16px 5px;
+    padding: 5px 0px 5px 16px;
     border: 1px solid lightgray;
     border-radius: 4px;
+    background: gray;
+    color: white;
 }
 

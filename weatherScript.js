@@ -8,6 +8,14 @@ $(document).ready(function () {
         console.log('worked')
         // need to prevent default for the form that im using
         event.preventDefault();
+        // need to get the city information when clicked
+        geCity();
+
+
+    })
+
+
+    function geCity() {
         var searchedCity = $("#city-search").val().trim();
         var addedCity = key + searchedCity;
         console.log(addedCity);
@@ -21,10 +29,14 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response) {
             console.log(response)
+            // need to store the serched item down below
+            var p = $("<p>");
+            p.addClass("searched");
+            p.text(response.city.name);
+            $("#serched-cities").prepend(p);
         });
-
-    })
-
+    }
+    // storing the searched city to a p tag below inside the search div
 
 
 
