@@ -9,12 +9,11 @@ $(document).ready(function () {
         // need to prevent default for the form that im using
         event.preventDefault();
         var searchedCity = $("#city-search").val();
-        key += searchedCity;
-        console.log(key);
+        var addedCity = key + searchedCity;
+        console.log(addedCity);
         // key is now concatinated with the searched city on click
         // need to attatch to the url now
-        queryURL += key;
-        console.log(queryURL)
+        console.log(queryURL + addedCity)
         // $.ajax({
         //     url: queryURL,
         //     method: "GET"
