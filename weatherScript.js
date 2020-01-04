@@ -15,6 +15,7 @@ $(document).ready(function () {
 
 
     })
+    // text of button gets injected back into the search
 
 
     function geCity() {
@@ -146,37 +147,6 @@ $(document).ready(function () {
             cardFive.append('<p>Humidity: ' + humidFive + '</p>');
         });
     }
-
-    function clearDivs() {
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     // these ending braces are for the document.ready
