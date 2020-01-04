@@ -3,7 +3,7 @@ $(document).ready(function () {
     var farenheight = 'units=imperial'
     var apiKey = "7061f9efd83e1dbb05cd692ec2f22061";
     var queryURL = "http://api.openweathermap.org/data/2.5/forecast?APPID=" + apiKey + '&' + farenheight + '&';
-    var currentDate = moment().format("MMM Do YY");
+    var currentDate = moment().format("YYYY/MMM/Do");
     // console.log(currentDate)
 
     $('#search-btn').on("click", function () {
@@ -31,8 +31,10 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response) {
             console.log(response)
+
+
             // need to store the serched item down below
-            var p = $("<p>");
+            var p = $("<button type='submit'>");
             p.addClass("searched");
             p.text(response.city.name);
             // storing the searched city to a p tag below inside the search div
@@ -41,12 +43,38 @@ $(document).ready(function () {
             var searchLocationID = $("#searched-location");
             searchLocationID.text(response.city.name + " (" + currentDate + ")");
             // testing to get temp
+
             // what I will need is a loop to go through each day of the week and grab the temp
-            var currentTemp = response.list[0].main.temp;
+            var currentTemp = response.list[0].main.temp.toString().split('.')[0] + '°F';
+            var currHumid = response.list[0].main.humidity;
+            var windSpeed = response.list[0].wind.speed.toString().split('.')[0];
+            var currentData = $(".current-data");
+            currentData.empty();
+            // need to clear the current weather div
+
+            currentData.append("<p>Temperature: " + currentTemp + "</p>")
+            currentData.append("<p>Humidity: " + currHumid + "%</p>")
+            currentData.append("<p>Wind Speed: " + windSpeed + " MPH</p>")
+            //need to call another Ajax for the UV index
+            var lon = response.city.coord.lon;
+            var lat = response.city.coord.lat;
+            var uvIndexURL = "http://api.openweathermap.org/data/2.5/uvi?APPID="
+            var secondURL = uvIndexURL + apiKey + '&lon=' + lon + '&lat=' + lat;
+
+            $.ajax({
+                url: secondURL,
+                method: "GET"
+            }).then(function (res) {
+                console.log('-----------------')
+                console.log(res)
+                var uvIndex = res.value;
+                console.log(uvIndex)
+                currentData.append("<p> UV Index: " + "<span class='uv-index'>" + uvIndex + "</span>" + "</p>")
+            })
             console.log(currentTemp);
-            // loop through response.list[i].weather[0].main
-            var typeOfDay = response.list;
-            console.log(typeOfDay)
+            // just getting list so I can see what to target
+            var list = response.list;
+            console.log(list)
             // creating variables for each part of the card
             var cardOne = $("#card-1");
             var cardTwo = $("#card-2");
@@ -119,7 +147,9 @@ $(document).ready(function () {
         });
     }
 
+    function clearDivs() {
 
+    }
 
 
 

@@ -14,7 +14,7 @@ p{
     margin: 5px 0;
 }
 h3{
-    margin: 16px 10px;
+    margin: 16px 0px;
 }
 h4{
     margin-bottom:20px;
@@ -46,47 +46,37 @@ input{
 }
 .cardContainer{
     display: flex;
+    flex-wrap: wrap;
 }
 .location-forecast{
     border: 1px solid lightgray;
     border-radius: 3px;
+    padding: 0 10px 10px 10px;
+}
+.location-section{
+    padding: 0 10px 10px 10px;
 }
 .searched{
-    padding: 5px 0px 5px 16px;
+    width: 90%;
+    margin-top:5px ;
     border: 1px solid lightgray;
     border-radius: 4px;
     background: gray;
     color: white;
 }
+.searched:hover{
+    background-color: darkgray;
+}
 /* cards */
-#card-1{
-    margin: 10px;
-    padding: 5px;
+.card{
+    margin: 5px;
+    padding: 10px;
     text-align: center;
     background-color: gray;
 }
-#card-2{
-    margin: 10px;
-    padding: 5px;
-    text-align: center;
-    background-color: gray;
+.uv-index{
+    background-color: rgb(255, 55, 55);
+    color: white;
+    padding: 3px 15px;
+    border-radius: 4px;
 }
-#card-3{
-    margin: 10px;
-    padding: 5px;
-    text-align: center;
-    background-color: gray;
-}
-#card-4{
-    margin: 10px;
-    padding: 5px;
-    text-align: center;
-    background-color: gray;
-}
-#card-5{
-    margin: 10px;
-    padding: 5px;
-    text-align: center;
-    background-color: gray;
-}
-
