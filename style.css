@@ -11,7 +11,7 @@ h1{
 }
 
 p{
-    margin: 16px 0;
+    margin: 5px 0;
 }
 h3{
     margin: 16px 10px;
@@ -44,7 +44,9 @@ input{
     
     
 }
-
+.cardContainer{
+    display: flex;
+}
 .location-forecast{
     border: 1px solid lightgray;
     border-radius: 3px;
@@ -55,5 +57,36 @@ input{
     border-radius: 4px;
     background: gray;
     color: white;
+}
+/* cards */
+#card-1{
+    margin: 10px;
+    padding: 5px;
+    text-align: center;
+    background-color: gray;
+}
+#card-2{
+    margin: 10px;
+    padding: 5px;
+    text-align: center;
+    background-color: gray;
+}
+#card-3{
+    margin: 10px;
+    padding: 5px;
+    text-align: center;
+    background-color: gray;
+}
+#card-4{
+    margin: 10px;
+    padding: 5px;
+    text-align: center;
+    background-color: gray;
+}
+#card-5{
+    margin: 10px;
+    padding: 5px;
+    text-align: center;
+    background-color: gray;
 }
 
