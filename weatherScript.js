@@ -31,10 +31,15 @@ $(document).ready(function () {
         }).then(function (response) {
             console.log(response)
             // need to store the serched item down below
-            var b = $("<button type='submit'>");
+            var b = $("<button type='submit' value='" + buttonCount + "'>");
             b.addClass("searched");
             b.text(response.city.name);
-            localStorage.setItem("cityName-" + buttonCount++, response.city.name)
+
+
+            //Local storage setting ************************************
+            localStorage.setItem("cityName-" + buttonCount++, newUrl)
+
+
             // storing the searched city to a p tag below inside the search div
             $("#serched-cities").prepend(b);
             //store name of city in the searched-location h3
@@ -83,7 +88,6 @@ $(document).ready(function () {
             cardFour.empty();
             cardFive.empty();
             // need to append information to those divs
-            // day data grab
             // var dayCurrent = response.list[0].dt_txt.split(" ")[0]; MIGHT NOT NEED THIS
             var dayOne = response.list[2].dt_txt.split(" ")[0].split("-").join("/");
             var dayTwo = response.list[10].dt_txt.split(" ")[0].split("-").join("/");
@@ -141,6 +145,13 @@ $(document).ready(function () {
             cardFive.append('<p>Humidity: ' + humidFive + '</p>');
         });
     }
+    $(".searched").on("click", function () {
+        // var gotKey = localStorage.getItem("cityName-" + this.value());
+        console.log('*******')
+        // console.log(gotKey)
+    })
+    // need to set each button with a function to grab the link from the 
+    //local storage and run it through the existing function called "getCity"
 
 
     // these ending braces are for the document.ready
