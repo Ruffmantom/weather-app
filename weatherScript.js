@@ -5,18 +5,15 @@ $(document).ready(function () {
     var queryURL = "http://api.openweathermap.org/data/2.5/forecast?APPID=" + apiKey + '&' + farenheight + '&';
     var currentDate = moment().format("YYYY/MMM/Do");
     // console.log(currentDate)
-
     $('#search-btn').on("click", function () {
         // console.log('worked')
         // need to prevent default for the form that im using
         event.preventDefault();
         // need to get the city information when clicked
         geCity();
-
-
     })
     // text of button gets injected back into the search
-
+    var buttonCount = 1;
 
     function geCity() {
         var searchedCity = $("#city-search").val().trim();
@@ -32,19 +29,16 @@ $(document).ready(function () {
             method: "GET"
         }).then(function (response) {
             console.log(response)
-
-
             // need to store the serched item down below
-            var p = $("<button type='submit'>");
-            p.addClass("searched");
-            p.text(response.city.name);
+            var b = $("<button type='submit'>");
+            b.addClass("searched");
+            b.text(response.city.name);
+            localStorage.setItem("cityName-" + buttonCount++, response.city.name)
             // storing the searched city to a p tag below inside the search div
-            $("#serched-cities").prepend(p);
+            $("#serched-cities").prepend(b);
             //store name of city in the searched-location h3
             var searchLocationID = $("#searched-location");
             searchLocationID.text(response.city.name + " (" + currentDate + ")");
-            // testing to get temp
-
             // what I will need is a loop to go through each day of the week and grab the temp
             var currentTemp = response.list[0].main.temp.toString().split('.')[0] + '°F';
             var currHumid = response.list[0].main.humidity;
@@ -52,7 +46,6 @@ $(document).ready(function () {
             var currentData = $(".current-data");
             currentData.empty();
             // need to clear the current weather div
-
             currentData.append("<p>Temperature: " + currentTemp + "</p>")
             currentData.append("<p>Humidity: " + currHumid + "%</p>")
             currentData.append("<p>Wind Speed: " + windSpeed + " MPH</p>")
