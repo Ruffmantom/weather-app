@@ -4,6 +4,7 @@ $(document).ready(function () {
     var apiKey = "7061f9efd83e1dbb05cd692ec2f22061";
     var queryURL = "http://api.openweathermap.org/data/2.5/forecast?APPID=" + apiKey + '&' + farenheight + '&';
     var currentDate = moment().format("YYYY/MMM/Do");
+    localStorage.clear();
     // console.log(currentDate)
     $('#search-btn').on("click", function () {
         // console.log('worked')
