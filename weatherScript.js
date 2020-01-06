@@ -6,41 +6,35 @@ var currentDate = moment().format("YYYY/MMM/Do");
 localStorage.clear();
 var buttonCount = 0;
 var currentData = $(".current-data");
-function recentlySearched() {
-    event.preventDefault()
-    var btnValue = $(this);
-    console.log(btnValue);
-    // var recSearched = localStorage.getItem();
+// creating variables for each part of the card
+var cardOne = $("#card-1");
+var cardTwo = $("#card-2");
+var cardThree = $("#card-3");
+var cardFour = $("#card-4");
+var cardFive = $("#card-5");
+var searchLocationID = $("#searched-location");
+var btnRes;
 
-    // if (recSearched == false) {
-    //     return newUrl;
-    // } else {
-    //     return recSearched;
-    // }
-}
-
-function geCity() {
-    var searchedCity = $("#city-search").val().trim();
-    var addedCity = key + searchedCity;
-    // console.log(addedCity);
-    // key is now concatinated with the searched city on click
-    // need to attatch to the url now
-    // console.log(queryURL + addedCity)
-    var newUrl = queryURL + addedCity;
-
-    //Local storage setting ************************************
-    localStorage.setItem("cityName-" + buttonCount, newUrl)
-    //want to get the URL from the local storage and when the recetly
-    //searched is cliked, pump that url into this ajax call
-    ajaxCall(newUrl)
-}
-function buildHTML(response) {
+function makeBtn(response) {
     var b = $("<button type='submit' data-value='" + buttonCount + "'>");
     b.addClass("searched");
     b.text(response.city.name);
     buttonCount++
+    // storing the searched city to a p tag below inside the search div
+    $("#serched-cities").prepend(b);
+}
+
+function buildHTML(response) {
+    // need to clear the current weather div
+    currentData.empty();
+    // empty divs every time the user clicks again
+    cardOne.empty();
+    cardTwo.empty();
+    cardThree.empty();
+    cardFour.empty();
+    cardFive.empty();
     //store name of city in the searched-location h3
-    var searchLocationID = $("#searched-location");
+
     searchLocationID.text(response.city.name + " (" + currentDate + ")");
     // what I will need is a loop to go through each day of the week and grab the temp
     var currentTemp = response.list[0].main.temp.toString().split('.')[0] + '°F';
@@ -51,15 +45,13 @@ function buildHTML(response) {
     var lat = response.city.coord.lat;
     var uvIndexURL = "http://api.openweathermap.org/data/2.5/uvi?APPID="
     var secondURL = uvIndexURL + apiKey + '&lon=' + lon + '&lat=' + lat;
-    // need to clear the current weather div
-    currentData.empty();
 
     $.ajax({
         url: secondURL,
         method: "GET"
     }).then(function (res) {
-        console.log('-----------------')
-        console.log(res)
+        console.log('------ second Ajax call-----------')
+        // console.log(res)
         var uvIndex = res.value;
         console.log(uvIndex)
         currentData.append("<p> UV Index: " + "<span class='uv-index'>" + uvIndex + "</span>" + "</p>")
@@ -68,22 +60,10 @@ function buildHTML(response) {
     currentData.append("<p>Temperature: " + currentTemp + "</p>")
     currentData.append("<p>Humidity: " + currHumid + "%</p>")
     currentData.append("<p>Wind Speed: " + windSpeed + " MPH</p>")
-    console.log(currentTemp);
+    // console.log(currentTemp);
     // just getting list so I can see what to target
     var list = response.list;
-    console.log(list)
-    // creating variables for each part of the card
-    var cardOne = $("#card-1");
-    var cardTwo = $("#card-2");
-    var cardThree = $("#card-3");
-    var cardFour = $("#card-4");
-    var cardFive = $("#card-5");
-    // empty divs every time the user clicks again
-    cardOne.empty();
-    cardTwo.empty();
-    cardThree.empty();
-    cardFour.empty();
-    cardFive.empty();
+    // console.log(list)
     // need to append information to those divs
     // var dayCurrent = response.list[0].dt_txt.split(" ")[0]; MIGHT NOT NEED THIS
     var dayOne = response.list[2].dt_txt.split(" ")[0].split("-").join("/");
@@ -140,9 +120,8 @@ function buildHTML(response) {
     cardThree.append('<p>Humidity: ' + humidThree + '</p>');
     cardFour.append('<p>Humidity: ' + humidFour + '</p>');
     cardFive.append('<p>Humidity: ' + humidFive + '</p>');
-
+    // ******** searched btn click function---------------------------
     $(".searched").on("click", function () {
-        // var gotKey = localStorage.getItem("cityName-" + this.value());
         event.preventDefault()
         var btnValue = $(this).data('value');
         console.log(btnValue);
@@ -156,11 +135,10 @@ function buildHTML(response) {
         console.log('*******')
         // console.log(gotKey)
     })
-    // storing the searched city to a p tag below inside the search div
-    $("#serched-cities").prepend(b);
 }
-function ajaxCall(dataUrl) {
 
+
+function ajaxCall(dataUrl) {
     //put ajax here
     $.ajax({
         url: dataUrl,
@@ -169,10 +147,20 @@ function ajaxCall(dataUrl) {
         console.log(res)
         console.log('***** ajax call function ********')
         buildHTML(res)
+        btnRes = res;
     })
 }
 
-
+function geCity() {
+    var searchedCity = $("#city-search").val().trim();
+    var addedCity = key + searchedCity;
+    var newUrl = queryURL + addedCity;
+    //Local storage setting ************************************
+    localStorage.setItem("cityName-" + buttonCount, newUrl)
+    //want to get the URL from the local storage and when the recetly
+    //searched is cliked, pump that url into this ajax call
+    ajaxCall(newUrl)
+}
 
 $(document).ready(function () {
     // console.log(currentDate)
@@ -180,6 +168,11 @@ $(document).ready(function () {
         // need to prevent default for the form that im using
         event.preventDefault();
         // need to get the city information when clicked by calling my function
+        makeBtn(btnRes)
         geCity();
+
+
+
     })
+
 })
