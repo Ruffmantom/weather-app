@@ -1,7 +1,7 @@
 var key = "q=";
 var farenheight = 'units=imperial'
 var apiKey = "7061f9efd83e1dbb05cd692ec2f22061";
-var queryURL = "https://api.openweathermap.org/data/2.5/forecast?APPID=" + apiKey + '&' + farenheight + '&';
+var queryURL = "http://api.openweathermap.org/data/2.5/forecast?APPID=" + apiKey + '&' + farenheight + '&';
 var currentDate = moment().format("YYYY/MMM/Do");
 localStorage.clear();
 var buttonCount = 0;
@@ -150,7 +150,7 @@ function ajaxCall(dataUrl) {
         btnRes = res;
         var lon = res.city.coord.lon;
         var lat = res.city.coord.lat;
-        var uvIndexURL = "https://api.openweathermap.org/data/2.5/uvi?APPID="
+        var uvIndexURL = "http://api.openweathermap.org/data/2.5/uvi?APPID="
         var secondURL = uvIndexURL + apiKey + '&lon=' + lon + '&lat=' + lat;
         var currIndex;
         return $.ajax({
