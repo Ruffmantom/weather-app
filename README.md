@@ -12,7 +12,7 @@ here is a demo video of the app working
 #### Choosing a recently searched
 ![choosing a recently searched on desktop](assets/three.png)
 
-### Had help with re appending items after I had broke it when refactoring my bud Aaron helped me see that since I had the button being made outside as a global variable, it wasn't making a new button each time instead it was just re-writing that button
+### Had help with re appending the recently serched btn's after I had broke it when refactoring my code. My firend Aaron helped me see that since I had the button being made outside as a global variable, it wasn't making a new button each time, instead it was just re-writing that button
 ```
 const addedCities = {}
 
@@ -28,7 +28,7 @@ function addRecSeBtn(cityName) {
     $("#serched-cities").prepend(b);
 }
 ```
-### He also helped me figure out why it was doubling with every time the recently searched button got pressed. basically it was adding an event listener each time the code ran and in reality that is not what I wanted but he introduced me to the unbind() method so that every time the code ran i would not repeat putting a event listener on the recently created button
+### He also helped me figure out why it was doubling with every time the recently searched button got pressed. basically it was adding an event listener each time the code ran, and in reality that is not what I wanted. But he introduced me to the unbind() method so that every time the code ran it would not repeat putting a event listener on the recently created button
 ```
 $(".searched")
         .unbind('click')
@@ -87,7 +87,7 @@ function ajaxCall(dataUrl) {
     })
 }
 ```
-### Also Riley helped a ton as well! hyped for all the help and being able to understand how it all works and came together. this was a really in depth HW really had to think this one through a ton.
+### Riley had also helped a ton! Hyped for all the help and being able to understand how it all works and came together. this was a really in depth HW really had to think this one through a ton.
 
 
 ---
