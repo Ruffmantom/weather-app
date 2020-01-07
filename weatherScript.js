@@ -16,11 +16,16 @@ var searchLocationID = $("#searched-location");
 var btnRes;
 var searchedCity;
 
+const addedCities = {}
 
-var b = $("<button type='submit' data-value='" + buttonCount + "'>");
-b.addClass("searched");
 
-function addRecSeBtn() {
+
+function addRecSeBtn(cityName) {
+    if(addedCities[cityName]) { return }
+    addedCities[cityName] = true;
+    var b = $("<button type='submit' data-value='" + buttonCount + "'>");
+    b.addClass("searched");
+    b.text(cityName)
     // storing the searched city to a p tag below inside the search div
     $("#serched-cities").prepend(b);
 }
@@ -85,7 +90,6 @@ function buildHTML(response) {
     currentData.append("<p>Wind Speed: " + windSpeed + " MPH</p>")
 
     console.log('---- current day')
-    console.log(currIndex)
     // day appends
     cardOne.append(dayOne);
     cardTwo.append(dayTwo);
@@ -111,10 +115,13 @@ function buildHTML(response) {
     cardFour.append('<p>Humidity: ' + humidFour + '</p>');
     cardFive.append('<p>Humidity: ' + humidFive + '</p>');
     // ******** searched btn click function---------------------------
-    b.text(response.city.name);
+    addRecSeBtn(response.city.name)
+
     buttonCount++
     //----------------------------------------------------------------
-    $(".searched").on("click", function () {
+    $(".searched")
+    .unbind('click')
+    .on("click", function (event) {
         event.preventDefault()
         var btnValue = $(this).data('value');
         console.log(btnValue);
@@ -146,17 +153,26 @@ function ajaxCall(dataUrl) {
         var uvIndexURL = "http://api.openweathermap.org/data/2.5/uvi?APPID="
         var secondURL = uvIndexURL + apiKey + '&lon=' + lon + '&lat=' + lat;
         var currIndex;
-        $.ajax({
+        return $.ajax({
             url: secondURL,
             method: "GET"
-        }).then(function (resTwo) {
-            console.log('------ second Ajax call-----------')
-            console.log(resTwo)
-            currIndex = resTwo.value;
-            currentData.append("<p> UV Index: " + "<span class='uv-index'>" + currIndex + "</span>" + "</p>")
-            console.log(currIndex)
-
         })
+    }).then(function (resTwo) {
+        console.log('------ second Ajax call-----------')
+        console.log(resTwo)
+        currIndex = resTwo.value;
+        currentData.append("<p> UV Index: " + "<span class='uv-index'>" + currIndex + "</span>" + "</p>")
+        console.log(currIndex)
+        return $.ajax({
+            url: secondURL,
+            method: "GET"
+        })
+    }).then(function (resTwo) {
+        console.log('------ second Ajax call-----------')
+        console.log(resTwo)
+        currIndex = resTwo.value;
+        currentData.append("<p> UV Index: " + "<span class='uv-index'>" + currIndex + "</span>" + "</p>")
+        console.log(currIndex)
     })
 }
 
@@ -170,7 +186,7 @@ function geCity(e) {
 
 $(document).ready(function () {
     // console.log(currentDate)
-    $('#search-btn').on("click", function () {
+    $('#search-btn').on("click", function(event) {
         searchedCity = $("#city-search").val().trim();
         var addedCity = key + searchedCity;
         var newUrl = queryURL + addedCity;
@@ -179,7 +195,6 @@ $(document).ready(function () {
 
         // need to get the city information when clicked by calling my function
         geCity(newUrl);
-        addRecSeBtn()
     })
 
 })
