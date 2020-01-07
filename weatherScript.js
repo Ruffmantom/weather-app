@@ -14,15 +14,18 @@ var cardFour = $("#card-4");
 var cardFive = $("#card-5");
 var searchLocationID = $("#searched-location");
 var btnRes;
+var searchedCity;
 
-function makeBtn(response) {
-    var b = $("<button type='submit' data-value='" + buttonCount + "'>");
-    b.addClass("searched");
-    b.text(response.city.name);
-    buttonCount++
+
+var b = $("<button type='submit' data-value='" + buttonCount + "'>");
+b.addClass("searched");
+
+function addRecSeBtn() {
     // storing the searched city to a p tag below inside the search div
     $("#serched-cities").prepend(b);
 }
+
+
 
 function buildHTML(response) {
     // need to clear the current weather div
@@ -34,49 +37,22 @@ function buildHTML(response) {
     cardFour.empty();
     cardFive.empty();
     //store name of city in the searched-location h3
-
     searchLocationID.text(response.city.name + " (" + currentDate + ")");
     // what I will need is a loop to go through each day of the week and grab the temp
     var currentTemp = response.list[0].main.temp.toString().split('.')[0] + '°F';
     var currHumid = response.list[0].main.humidity;
     var windSpeed = response.list[0].wind.speed.toString().split('.')[0];
     //need to call another Ajax for the UV index
-    var lon = response.city.coord.lon;
-    var lat = response.city.coord.lat;
-    var uvIndexURL = "http://api.openweathermap.org/data/2.5/uvi?APPID="
-    var secondURL = uvIndexURL + apiKey + '&lon=' + lon + '&lat=' + lat;
 
-    $.ajax({
-        url: secondURL,
-        method: "GET"
-    }).then(function (res) {
-        console.log('------ second Ajax call-----------')
-        // console.log(res)
-        var uvIndex = res.value;
-        console.log(uvIndex)
-        currentData.append("<p> UV Index: " + "<span class='uv-index'>" + uvIndex + "</span>" + "</p>")
-
-    })
-    currentData.append("<p>Temperature: " + currentTemp + "</p>")
-    currentData.append("<p>Humidity: " + currHumid + "%</p>")
-    currentData.append("<p>Wind Speed: " + windSpeed + " MPH</p>")
-    // console.log(currentTemp);
     // just getting list so I can see what to target
     var list = response.list;
     // console.log(list)
-    // need to append information to those divs
     // var dayCurrent = response.list[0].dt_txt.split(" ")[0]; MIGHT NOT NEED THIS
     var dayOne = response.list[2].dt_txt.split(" ")[0].split("-").join("/");
     var dayTwo = response.list[10].dt_txt.split(" ")[0].split("-").join("/");
     var dayThree = response.list[18].dt_txt.split(" ")[0].split("-").join("/");
     var dayFour = response.list[26].dt_txt.split(" ")[0].split("-").join("/");
     var dayFive = response.list[34].dt_txt.split(" ")[0].split("-").join("/");
-    // day appends
-    cardOne.append(dayOne);
-    cardTwo.append(dayTwo);
-    cardThree.append(dayThree);
-    cardFour.append(dayFour);
-    cardFive.append(dayFive);
     // variables for icons
     var iconOne = response.list[2].weather[0].icon;
     var iconTwo = response.list[10].weather[0].icon;
@@ -89,31 +65,45 @@ function buildHTML(response) {
     var iconURLThree = 'http://openweathermap.org/img/wn/' + iconThree + '@2x.png';
     var iconURLFour = 'http://openweathermap.org/img/wn/' + iconFour + '@2x.png';
     var iconURLFive = 'http://openweathermap.org/img/wn/' + iconFive + '@2x.png';
-    console.log(iconURLOne);
-    //need to append to cards
-    cardOne.append('<img src="' + iconURLOne + '">');
-    cardTwo.append('<img src="' + iconURLTwo + '">');
-    cardThree.append('<img src="' + iconURLThree + '">');
-    cardFour.append('<img src="' + iconURLFour + '">');
-    cardFive.append('<img src="' + iconURLFive + '">');
+    // console.log(iconURLOne);
     // grab the temp
     var tempOne = response.list[2].main.temp.toString().split('.')[0] + '°F';
     var tempTwo = response.list[10].main.temp.toString().split('.')[0] + '°F';
     var tempThree = response.list[18].main.temp.toString().split('.')[0] + '°F';
     var tempFour = response.list[26].main.temp.toString().split('.')[0] + '°F';
     var tempFive = response.list[34].main.temp.toString().split('.')[0] + '°F';
-    // need to append the temps
-    cardOne.append('<p>Temp: ' + tempOne + '</p>');
-    cardTwo.append('<p>Temp: ' + tempTwo + '</p>');
-    cardThree.append('<p>Temp: ' + tempThree + '</p>');
-    cardFour.append('<p>Temp: ' + tempFour + '</p>');
-    cardFive.append('<p>Temp: ' + tempFive + '</p>');
     // grab the humidity
     var humidOne = response.list[2].main.humidity + '%';
     var humidTwo = response.list[10].main.humidity + '%';
     var humidThree = response.list[18].main.humidity + '%';
     var humidFour = response.list[26].main.humidity + '%';
     var humidFive = response.list[34].main.humidity + '%';
+    //APENDING ------------------------------------------------------------------------------
+    //Current Day appends
+    currentData.append("<p>Temperature: " + currentTemp + "</p>")
+    currentData.append("<p>Humidity: " + currHumid + "%</p>")
+    currentData.append("<p>Wind Speed: " + windSpeed + " MPH</p>")
+
+    console.log('---- current day')
+    console.log(currIndex)
+    // day appends
+    cardOne.append(dayOne);
+    cardTwo.append(dayTwo);
+    cardThree.append(dayThree);
+    cardFour.append(dayFour);
+    cardFive.append(dayFive);
+    //need to append to cards
+    cardOne.append('<img src="' + iconURLOne + '">');
+    cardTwo.append('<img src="' + iconURLTwo + '">');
+    cardThree.append('<img src="' + iconURLThree + '">');
+    cardFour.append('<img src="' + iconURLFour + '">');
+    cardFive.append('<img src="' + iconURLFive + '">');
+    // need to append the temps
+    cardOne.append('<p>Temp: ' + tempOne + '</p>');
+    cardTwo.append('<p>Temp: ' + tempTwo + '</p>');
+    cardThree.append('<p>Temp: ' + tempThree + '</p>');
+    cardFour.append('<p>Temp: ' + tempFour + '</p>');
+    cardFive.append('<p>Temp: ' + tempFive + '</p>');
     // append humidity
     cardOne.append('<p>Humidity: ' + humidOne + '</p>');
     cardTwo.append('<p>Humidity: ' + humidTwo + '</p>');
@@ -121,6 +111,9 @@ function buildHTML(response) {
     cardFour.append('<p>Humidity: ' + humidFour + '</p>');
     cardFive.append('<p>Humidity: ' + humidFive + '</p>');
     // ******** searched btn click function---------------------------
+    b.text(response.city.name);
+    buttonCount++
+    //----------------------------------------------------------------
     $(".searched").on("click", function () {
         event.preventDefault()
         var btnValue = $(this).data('value');
@@ -148,31 +141,45 @@ function ajaxCall(dataUrl) {
         console.log('***** ajax call function ********')
         buildHTML(res)
         btnRes = res;
+        var lon = res.city.coord.lon;
+        var lat = res.city.coord.lat;
+        var uvIndexURL = "http://api.openweathermap.org/data/2.5/uvi?APPID="
+        var secondURL = uvIndexURL + apiKey + '&lon=' + lon + '&lat=' + lat;
+        var currIndex;
+        $.ajax({
+            url: secondURL,
+            method: "GET"
+        }).then(function (resTwo) {
+            console.log('------ second Ajax call-----------')
+            console.log(resTwo)
+            currIndex = resTwo.value;
+            currentData.append("<p> UV Index: " + "<span class='uv-index'>" + currIndex + "</span>" + "</p>")
+            console.log(currIndex)
+
+        })
     })
 }
 
-function geCity() {
-    var searchedCity = $("#city-search").val().trim();
-    var addedCity = key + searchedCity;
-    var newUrl = queryURL + addedCity;
+function geCity(e) {
     //Local storage setting ************************************
-    localStorage.setItem("cityName-" + buttonCount, newUrl)
+    localStorage.setItem("cityName-" + buttonCount, e)
     //want to get the URL from the local storage and when the recetly
     //searched is cliked, pump that url into this ajax call
-    ajaxCall(newUrl)
+    ajaxCall(e)
 }
 
 $(document).ready(function () {
     // console.log(currentDate)
     $('#search-btn').on("click", function () {
+        searchedCity = $("#city-search").val().trim();
+        var addedCity = key + searchedCity;
+        var newUrl = queryURL + addedCity;
         // need to prevent default for the form that im using
         event.preventDefault();
+
         // need to get the city information when clicked by calling my function
-        makeBtn(btnRes)
-        geCity();
-
-
-
+        geCity(newUrl);
+        addRecSeBtn()
     })
 
 })
