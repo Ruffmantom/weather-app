@@ -92,5 +92,5 @@ function ajaxCall(dataUrl) {
 
 
 ---
-##  License and Copyright 
-© Tom Ruff, U of U Full Stack Bootcamp
+## License
+© Tom Ruff [RuffWD](http://www.ruffwd.tech/)
