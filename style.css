@@ -98,9 +98,6 @@ footer{
     background-color: rgba(100, 100, 100);
     display: flex;
     width: 100%;
-    margin-top: 30px;
-    text-align: center;
-    flex-shrink: 0;
     
 }
 
@@ -109,10 +106,18 @@ footer{
     display: flex;
     padding: auto 7rem;
     justify-content: center;
+    margin: auto;
 }
 .icons{
-    height: 40%;
+    height: 60%;
     width: auto;
-    margin: auto 20px;
+    margin: auto 30px;
 }
+.row{
+    margin: 0;
+}
+
+
+
+
 
