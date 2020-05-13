@@ -1,5 +1,6 @@
 # Weather App
-* Here is the weather app that is for the 06 homework
+
+This homework was built to show the use of more in-depth API/Ajax calls to get information to the user by searching it in the input box. This app is meant to show the user the current weather and 5-day projections for the area the user searches for.
 
 ---
 here is a demo video of the app working
