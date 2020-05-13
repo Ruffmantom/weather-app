@@ -3,9 +3,10 @@
 This homework was built to show the use of more in-depth API/Ajax calls to get information to the user by searching it in the input box. This app is meant to show the user the current weather and 5-day projections for the area the user searches for.
 
 ---
-here is a demo video of the app working
+### here is a demo video of the app working
+---
 ![desktop video of saving to local storage](assets/demo.mov);
-
+---
 #### On load up
 ![load up on desktop](assets/one.png)
 #### First entry
