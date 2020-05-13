@@ -89,7 +89,7 @@ function ajaxCall(dataUrl) {
     })
 }
 ```
-### Riley had also helped a ton! Hyped for all the help and being able to understand how it all works and came together. this was a really in depth HW really had to think this one through a ton.
+### My TA had also helped a ton! Hyped for all the help and being able to understand how it all works and came together. this was a really in depth HW really had to think this one through a ton.
 
 
 ---
